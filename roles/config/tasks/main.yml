@@ -112,3 +112,13 @@
 #        content:
 #          {"infraAccPortP":{"attributes":{"descr":"","dn":"uni/infra/accportprof-{{ item.access_policy_interface_policy_profile_name }}","name":"{{ item.access_policy_interface_policy_profile_name }}","ownerKey":"","ownerTag":""},"children":[{"infraHPortS":{"attributes":{"descr":"","name":"{{ item.access_policy_interface_policy_profile_interface_selector_name }}","ownerKey":"","ownerTag":"","type":"range"},"children":[{"infraRsAccBaseGrp":{"attributes":{"fexId":"101","tDn":"uni/infra/funcprof/{{ item.access_policy_interface_policy_profile_interface_selector_policy_group_type }}-{{ item.access_policy_interface_policy_profile_interface_selector_policy_group }}"}}},{"infraPortBlk":{"attributes":{"descr":"","fromCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","fromPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_from }}","name":"block2","toCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","toPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_to }}"}}}]}}]}}
 #      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
+    - name: Associate an access port block (single port) to an interface selector
+      aci_access_port_block_to_access_port:
+        <<: *aci_login
+        leaf_interface_profile: POD1_Leaf101
+        access_port_selector: POD1_Leaf101
+        leaf_port_blk: POD1_Leaf101
+        from_port: 5
+        to_port: 5
+        state: '{{state}}'
+      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
