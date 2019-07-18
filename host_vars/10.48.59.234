@@ -61,7 +61,7 @@ aci_model_data:
     - name: POD1_Leaf101
       interface_selector:
       - name: ESX01_vmnic2
-        int_card: 1
+        int_card: 2
         int_to: 16
         int_from: 16
         policy_group: CDP_on_LLDP_off
