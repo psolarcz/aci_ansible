@@ -113,13 +113,11 @@
 #        state: '{{state}}'
 #      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
 
-    - name: Associate an access port block (single port) to an interface selector
-      aci_access_port_block_to_access_port:
+    - name: Add interface selector profiles to switch policy profiles
+      aci_rest:
         <<: *aci_login
-        leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
-        access_port_selector: '{{item.access_policy_interface_policy_profile_interface_selector_name}}'
-        leaf_port_blk: '{{item.access_policy_interface_policy_profile_interface_selector_int_card}}'
-        from_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_from}}'
-        to_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_to}}'
-        state: '{{state}}'
-      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
+        path: /api/node/mo/uni/infra/nprof-{{ item.access_policy_switch_policy_profile_name }}.json
+        method: post
+        content:
+          {"infraNodeP":{"attributes":{"descr":"","dn":"uni/infra/nprof-{{ item.access_policy_switch_policy_profile_name }}","name":"{{ item.access_policy_switch_policy_profile_name }}","ownerKey":"","ownerTag":""},"children":[{"infraRsAccPortP":{"attributes":{"tDn":"uni/infra/accportprof-{{ item.access_policy_switch_policy_profile_interface_selector_profile_name }}"}}}]}}
+      with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","interface_selector_profile") }}'
