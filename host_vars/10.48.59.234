@@ -50,35 +50,41 @@ aci_model_data:
       lldp: LLDPon
       aep: 99_baremetal_01
   - interface_policy_profile:
-    - name: leaf_997_998
+#    - name: leaf_997_998
+#      interface_selector:
+#      - name: Router01
+#        int_card: 1
+#        int_to: 22
+#        int_from: 22
+#        policy_group: 99_router_01
+#        policy_group_type: accbundle
+    - name: POD1_Leaf101
       interface_selector:
-      - name: Router01
+      - name: ESX01_vmnic2
         int_card: 1
-        int_to: 22
-        int_from: 22
-        policy_group: 99_router_01
-        policy_group_type: accbundle
-    - name: leaf_997
-      interface_selector:
-      - name: Server01
-        int_card: 1
-        int_to: 33
-        int_from: 33
-        policy_group: 99_baremetal_01
+        int_to: 16
+        int_from: 16
+        policy_group: CDP_on_LLDP_off
         policy_group_type: accportgrp
-      - name: Server02
+      - name: DCN-CAT4948-1__1_21
         int_card: 1
-        int_to: 34
-        int_from: 34
-        policy_group: 99_baremetal_01
+        int_to: 21
+        int_from: 21
+        policy_group: CDP_on_LLDP_off
         policy_group_type: accportgrp
-    - name: leaf_998
+    - name: POD1_Leaf102
       interface_selector:
-      - name: Server02
+      - name: ESX02_vmnic3
         int_card: 1
-        int_to: 35
-        int_from: 35
-        policy_group: 99_baremetal_01
+        int_to: 48
+        int_from: 48
+        policy_group: CDP_on_LLDP_off
+        policy_group_type: accportgrp
+      - name: DCN-CAT4948-1__1_5
+        int_card: 1
+        int_to: 5
+        int_from: 5
+        policy_group: CDP_on_LLDP_off
         policy_group_type: accportgrp
   - vlan_pool:
     - name: POD1_100-149_Static
