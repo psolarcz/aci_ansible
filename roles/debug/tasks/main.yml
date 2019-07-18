@@ -1,19 +1,8 @@
 ---
 - name: Debug
-  loop: "{{ leafs }}"
+  with_items: '{{ aci_topology|aci_listify("access_policy","switch_policy_profile","leaf_selector") }}'
+#  with_items: '{{vars.aci_topology}}'
   debug:
    # loop: "{{item.interfaces}}"
-    msg: "Hops {{item}}"
+    msg: "{{item}}"
 
-
-- debug:
-    msg: "{{ item }}"
-  vars:
-    nested_list:
-      - - First
-        - one
-        - two
-        - three
-      - - 2nd
-        - 3rd
-  with_items: "{{hostvars.leaf101.interfaces}}"
