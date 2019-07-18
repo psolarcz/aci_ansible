@@ -10,4 +10,4 @@
 #  with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","leaf_selector") }}'
   debug:
    # loop: "{{item.interfaces}}"
-    msg: "{{}}"
+    msg: "{{apic}}"
