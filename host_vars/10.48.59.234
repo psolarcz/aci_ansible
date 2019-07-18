@@ -12,14 +12,14 @@ aci_model_data:
       switch1: 997
       switch2: 998
   - switch_policy_profile:
-    - name: leaf_997
+    - name: POD1_Leaf101
       leaf_selector:
       - name: 997
         from: 997
         to: 997
       interface_selector_profile:
       - name: leaf_997
-    - name: leaf_998
+    - name: POD1_Leaf102
       leaf_selector:
       - name: 998
         from: 998
@@ -81,34 +81,31 @@ aci_model_data:
         policy_group: 99_baremetal_01
         policy_group_type: accportgrp
   - vlan_pool:
-    - name: 99_router_01
+    - name: POD1_100-149_Static
       alloc: static
       encap_block:
-      - from: 201
-        to: 201
-    - name: 99_baremetal_01
-      alloc: static
+      - from: 100
+        to: 149
+    - name: POD1_150-199_Dynamic
+      alloc: dynamic
       encap_block:
-      - from: 101
-        to: 102
+      - from: 150
+        to: 199
   - aep:
-    - name: 99_router_01
+    - name: POD1_AAEP
       domain:
-      - name: l3dom-99_router_01
-    - name: 99_baremetal_01
-      domain:
-      - name: phys-99_baremetal_01
+      - name: POD1_phyDomain
   - external_routed_domain:
     - name: 99_router_01
       vlan_pool: 99_router_01
       vlan_pool_alloc: static
   - physical_domain:
-    - name: 99_baremetal_01
-      vlan_pool: 99_baremetal_01
+    - name: POD1_phyDomain
+      vlan_pool: POD1_100-149_Static
       vlan_pool_alloc: static
   tenant:
   - name: Pod1_Customer99
-    description: Customer01
+    description: Customer99_Configured by Ansible
     app:
     - name: Billing
       epg:

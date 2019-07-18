@@ -20,3 +20,12 @@
         tenant: '{{ item.tenant_name }}'
         description: '{{ item.tenant_description }}'
       with_items: '{{ aci_model_data|aci_listify("tenant") }}'
+
+    - name: Add VLAN pools
+      aci_vlan_pool:
+        <<: *aci_login
+        path: /api/node/mo/uni/infra/vlanns-[{{ item.access_policy_vlan_pool_name }}]-{{ item.access_policy_vlan_pool_alloc }}.json
+        method: post
+        content:
+          {"fvnsVlanInstP":{"attributes":{"allocMode":"{{ item.access_policy_vlan_pool_alloc }}","descr":"","dn":"uni/infra/vlanns-[{{ item.access_policy_vlan_pool_name }}]-{{ item.access_policy_vlan_pool_alloc }}","name":"{{ item.access_policy_vlan_pool_name }}","ownerKey":"","ownerTag":""}}}
+      with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool") }}'
