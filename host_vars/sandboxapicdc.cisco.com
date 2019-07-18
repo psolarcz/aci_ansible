@@ -39,9 +39,7 @@ aci_model_data:
       transmit_state: enabled
   - interface_policy_cdp:
     - name: POD1_CDPon
-      state:
-
-
+      adminSt: enabled
   - interface_policy_port_channel:
     - name: LACPactive
       mode: active
