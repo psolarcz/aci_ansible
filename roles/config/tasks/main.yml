@@ -107,9 +107,9 @@
       aci_access_port_block_to_access_port:
         <<: *aci_login
         leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
-        access_port_selector: '{{access_policy_interface_policy_profile_interface_selector_name}}'
-        leaf_port_blk: '{{access_policy_interface_policy_profile_interface_selector_name}}'
-        from_port: '{{access_policy_interface_policy_profile_interface_selector_int_from}}'
-        to_port: '{{access_policy_interface_policy_profile_interface_selector_int_to}}'
+        access_port_selector: '{{item.access_policy_interface_policy_profile_interface_selector_name}}'
+        leaf_port_blk: '{{item.access_policy_interface_policy_profile_interface_selector_name}}'
+        from_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_from}}'
+        to_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_to}}'
         state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
