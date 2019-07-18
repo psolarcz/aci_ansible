@@ -103,12 +103,22 @@
         state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile") }}'
 
+#    - name: Create a Leaf Access Port Policy Group (no description)
+#      aci_interface_policy_leaf_policy_group:
+#        <<: *aci_login
+#        lag_type: leaf
+#        policy_group: policygroupname
+#        link_level_policy: whateverlinklevelpolicy
+#        fibre_channel_interface_policy: whateverfcpolicy
+#        state: '{{state}}'
+#      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
+
     - name: Associate an access port block (single port) to an interface selector
       aci_access_port_block_to_access_port:
         <<: *aci_login
         leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
         access_port_selector: '{{item.access_policy_interface_policy_profile_interface_selector_name}}'
-        leaf_port_blk: '{{item.access_policy_interface_policy_profile_interface_selector_policy_group}}'
+        leaf_port_blk: '{{item.access_policy_interface_policy_profile_interface_selector_int_card}}'
         from_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_from}}'
         to_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_to}}'
         state: '{{state}}'
