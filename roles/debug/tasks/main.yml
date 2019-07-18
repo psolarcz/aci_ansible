@@ -7,7 +7,6 @@
 
 
 - name: Debug
-  with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy","interface_selector") }}'
+  with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
   debug:
-   # loop: "{{item.access_policy_interface_policy_profile_name_interface_selector}}"
     msg: "{{item}}"
