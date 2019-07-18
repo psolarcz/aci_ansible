@@ -95,15 +95,6 @@
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","leaf_selector") }}'
 
-    - name: Add a new leaf_interface_profile
-      aci_interface_policy_leaf_profile:
-        <<: *aci_login
-        leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
-        description:  Configured by Ansible
-        state: '{{state}}'
-      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile") }}'
-
-
     - name: Add interface selector to interface policy profiles
       aci_rest:
         <<: *aci_login
@@ -144,6 +135,13 @@
         state: present
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_policy_group_access") }}'
 
+    - name: Add a new leaf_interface_profile
+      aci_interface_policy_leaf_profile:
+        <<: *aci_login
+        leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
+        description:  Configured by Ansible
+        state: '{{state}}'
+      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile") }}'
 
 #    - name: Associate an access port block (single port) to an interface selector
 #      aci_access_port_block_to_access_port:
