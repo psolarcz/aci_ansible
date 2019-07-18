@@ -131,8 +131,7 @@
             attributes:
               name: "{{ item.access_policy_interface_policy_cdp_name }}"
               adminSt: "{{ item.access_policy_interface_policy_cdp_adminSt }}"  #Admin State setting, can be enabled or disabled
-      with_items:
-        - "{{ aci_model_data|aci_listify('access_policy','interface_policy_cdp') }}"
+      with_items: "{{ aci_model_data|aci_listify('access_policy','interface_policy_cdp') }}"
 
     - name: Create a Leaf Access Port Policy Group (no description)
       aci_interface_policy_leaf_policy_group:
