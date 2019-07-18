@@ -1,10 +1,17 @@
 
+#[apic:vars]
+#username=admin
+#password=ciscopsdt
+#ansible_python_interpreter="/usr/bin/env python"
+#
+#[apic]
+#sandboxapicdc.cisco.com
+
+
 [apic:vars]
-username=admin
-password=ciscopsdt
+username=pod1
+password=ins3965!
 ansible_python_interpreter="/usr/bin/env python"
 
 [apic]
-sandboxapicdc.cisco.com
-
-
+10.48.59.234
