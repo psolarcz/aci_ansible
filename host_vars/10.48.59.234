@@ -14,25 +14,25 @@ aci_model_data:
   - switch_policy_profile:
     - name: POD1_Leaf101
       leaf_selector:
-      - name: 997
-        from: 997
-        to: 997
+      - name: 101
+        from: 101
+        to: 101
       interface_selector_profile:
-      - name: leaf_997
+      - name: POD1_Leaf101
     - name: POD1_Leaf102
       leaf_selector:
-      - name: 998
-        from: 998
-        to: 998
+      - name: 102
+        from: 102
+        to: 102
       interface_selector_profile:
-      - name: leaf_998
-    - name: leaf_997_998
+      - name: POD1_Leaf102
+    - name: POD1_Leaf101_102
       leaf_selector:
-      - name: 997_998
-        from: 997
-        to: 998
+      - name: 101_102
+        from: 101
+        to: 102
       interface_selector_profile:
-      - name: leaf_997_998
+      - name: POD1_Leaf101_102
   - interface_policy_lldp:
     - name: LLDPon
       receive_state: enabled
