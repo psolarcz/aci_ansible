@@ -35,11 +35,11 @@ aci_model_data:
       - name: POD1_Leaf101_102
   - interface_policy_lldp:
     - name: POD1_LLDPon
-      receive_state: enabled
-      transmit_state: enabled
+      receive_state: yes
+      transmit_state: yes
   - interface_policy_cdp:
     - name: POD1_CDPon
-      adminSt: enabled
+      adminSt: yes
   - interface_policy_port_channel:
     - name: LACPactive
       mode: active
