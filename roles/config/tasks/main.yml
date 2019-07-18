@@ -66,3 +66,13 @@
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","aep", "domain") }}'
 
+    - name: Bind a physical domain to VLAN pool
+      aci_domain_to_vlan_pool:
+        <<: *aci_login
+        domain: "{{item.access_policy_access_policy_name}}"
+        domain_type: '{{item.access_policy_access_policy_vlan_pool_alloc}}'
+        pool: "{{item.access_policy_access_policy_vlan_pool}}"
+        pool_allocation_mode: static
+        state: "{{state}}"
+      with_items: '{{ aci_model_data|aci_listify("access_policy","physical_domain") }}'
+
