@@ -62,7 +62,7 @@
         <<: *aci_login
         aep: "{{item.access_policy_aep_name}}"
         domain: "{{item.access_policy_aep_domain_name}}"
-#        domain_type: phys
+        domain_type: phys
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","aep", "domain") }}'
 
