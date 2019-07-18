@@ -130,7 +130,7 @@
           cdpIfPol: #CDP policy object itself
             attributes:
               name: "{{ item.access_policy_interface_policy_cdp_name }}"
-              status: created #"{{ item.access_policy_interface_policy_cdp_adminSt }}"  #Admin State setting, can be enabled or disabled
+              status: "{{ item.access_policy_interface_policy_cdp_adminSt }}"  #Admin State setting, can be enabled or disabled
       with_items: "{{ aci_model_data|aci_listify('access_policy','interface_policy_cdp') }}"
 
     - name: Create a Leaf Access Port Policy Group (no description)
