@@ -98,7 +98,7 @@
     - name: Add a new leaf_interface_profile
       aci_interface_policy_leaf_profile:
         <<: *aci_login
-        leaf_interface_profile: '{{item.access_policy_access_policy_name}}'
+        leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
         description:  Configured by Ansible
         state: '{{state}}'
-      with_items: '{{ aci_model_data|aci_listify("access_policy","access_policy") }}'
+      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile") }}'
