@@ -11,9 +11,9 @@
     - debug
 
 
-- name: Configure Tenants
+- name: Configure ACI
   hosts: apic
   connection: local
   gather_facts: false
   roles:
-#    - tenant
+    - config
