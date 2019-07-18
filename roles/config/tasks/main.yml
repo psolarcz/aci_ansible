@@ -40,3 +40,12 @@
         block_end: "{{item.access_policy_vlan_pool_encap_block_to}}"
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool","encap_block") }}'
+
+    - name: Add physical domains
+      aci_domain:
+        <<: *aci_login
+        domain: "{{item.access_policy_physical_domain_name}}"
+        domain_type: '{{item.access_policy_physical_domain_vlan_pool_alloc}}'
+        state: "{{state}}"
+      with_items: '{{ aci_model_data|aci_listify("access_policy","physical_domain") }}'
+
