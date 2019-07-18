@@ -49,3 +49,20 @@
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","physical_domain") }}'
 
+    - name: Add a new AEP
+      aci_aep:
+        <<: *aci_login
+        aep: "{{item.access_policy_aep_name}}"
+        description: Configured by ansible
+        state: "{{state}}"
+      with_items: '{{ aci_model_data|aci_listify("access_policy","aep") }}'
+
+    - name: Link AEPs to domains
+      aci_aep_to_domain: #&binding_present
+        <<: *aci_login
+        aep: "{{item.access_policy_aep_name}}"
+        domain: "{{item.access_policy_aep_domain_name}}"
+#        domain_type: phys
+        state: "{{state}}"
+      with_items: '{{ aci_model_data|aci_listify("access_policy","aep", "domain") }}'
+
