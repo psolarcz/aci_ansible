@@ -89,7 +89,7 @@
         <<: *aci_login
         leaf_profile: "{{item.access_policy_switch_policy_profile_name}}"
         leaf: "{{item.access_policy_switch_policy_profile_leaf_selector_name}}"
-        leaf_node_blk: "{{item.access_policy_switch_policy_profile_leaf_selector_int_card}}"
+        leaf_node_blk: "{{item.access_policy_switch_policy_profile_leaf_selector_name}}"
         from: "{{item.access_policy_switch_policy_profile_leaf_selector_from}}"
         to: "{{item.access_policy_switch_policy_profile_leaf_selector_to}}"
         state: "{{state}}"
