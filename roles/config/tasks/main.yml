@@ -24,8 +24,8 @@
     - name: Add VLAN pools
       aci_vlan_pool:
         <<: *aci_login
-        path: /api/node/mo/uni/infra/vlanns-[{{ item.access_policy_vlan_pool_name }}]-{{ item.access_policy_vlan_pool_alloc }}.json
-        method: post
-        content:
-          {"fvnsVlanInstP":{"attributes":{"allocMode":"{{ item.access_policy_vlan_pool_alloc }}","descr":"","dn":"uni/infra/vlanns-[{{ item.access_policy_vlan_pool_name }}]-{{ item.access_policy_vlan_pool_alloc }}","name":"{{ item.access_policy_vlan_pool_name }}","ownerKey":"","ownerTag":""}}}
+        pool: '{{item.access_policy_vlan_pool_name}}'
+        pool_allocation_mode: '{{access_policy_vlan_pool_alloc}}'
+        description: Configured by Ansible
+        state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool") }}'
