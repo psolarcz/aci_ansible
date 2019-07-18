@@ -35,7 +35,7 @@
         <<: *aci_login
         block_name: "{{item.access_policy_vlan_pool_name}}"
         pool: "{{item.access_policy_vlan_pool_name}}"
-        pool_allocation_mode: static
+        pool_allocation_mode: '{{item.access_policy_vlan_pool_alloc}}'
         block_start: "{{item.access_policy_vlan_pool_encap_block_from}}"
         block_end: "{{item.access_policy_vlan_pool_encap_block_to}}"
         state: "{{state}}"
