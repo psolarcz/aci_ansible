@@ -1,7 +1,7 @@
 ---
 apic_username: admin
 apic_use_proxy: no
-apic_validate_certs: yes
+apic_validate_certs: no
 
 
 aci_topology:
