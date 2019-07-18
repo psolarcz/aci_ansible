@@ -5,7 +5,6 @@ password=ciscopsdt
 ansible_python_interpreter="/usr/bin/env python"
 
 [apic]
-sandboxapicdc.cisco.com ansible_username=admin ansible_password=ciscopsdt
+sandboxapicdc.cisco.com
 
-[leafs]
-leaf101
+
