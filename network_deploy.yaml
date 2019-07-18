@@ -16,4 +16,4 @@
   connection: local
   gather_facts: false
   roles:
-    - config
+#    - config
