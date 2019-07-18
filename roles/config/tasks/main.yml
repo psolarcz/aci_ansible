@@ -124,7 +124,7 @@
     - name: Create a CDP policy
       aci_rest:
         <<: *aci_login
-        path: api/node/mo/uni/infra/cdpIfP-"{{ item.access_policy_interface_policy_cdp_name }}".json  # Path to the CDP object
+        path: api/node/mo/uni/infra/cdpIfP-{{ item.access_policy_interface_policy_cdp_name }}.json  # Path to the CDP object
         method: "{{ 'post' if (state == 'present') else 'delete' }}"
         content:
           cdpIfPol: #CDP policy object itself
