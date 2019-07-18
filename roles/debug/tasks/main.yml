@@ -7,7 +7,7 @@
 
 
 - name: Debug
-  with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool") }}'
+  with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool","encap_block") }}'
   debug:
    # loop: "{{item.interfaces}}"
     msg: "{{item}}"

@@ -29,3 +29,14 @@
         description: Configured by Ansible
         state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool") }}'
+
+    - name: Add a new VLAN encap block
+      aci_vlan_pool_encap_block:
+        <<: *aci_login
+        block_name: "{{global.vlan_pool}}"
+        pool: "{{global.vlan_pool}}"
+        pool_allocation_mode: static
+        block_start: "{{global.vlan_min}}"
+        block_end: "{{global.vlan_max}}"
+        state: "{{state}}"
+      with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool","encap_block") }}'
