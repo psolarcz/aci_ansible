@@ -4,7 +4,7 @@ apic_use_proxy: no
 apic_validate_certs: no
 
 
-aci_topology:
+aci_model_data:
   access_policy:
   - switch_policy_virtual_port_channel:
     - name: 997_998
