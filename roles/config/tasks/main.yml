@@ -25,7 +25,7 @@
       aci_vlan_pool:
         <<: *aci_login
         pool: '{{item.access_policy_vlan_pool_name}}'
-        pool_allocation_mode: '{{access_policy_vlan_pool_alloc}}'
+        pool_allocation_mode: '{{item.access_policy_vlan_pool_alloc}}'
         description: Configured by Ansible
         state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool") }}'
