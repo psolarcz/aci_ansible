@@ -102,3 +102,14 @@
         description:  Configured by Ansible
         state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile") }}'
+
+    - name: Associate an access port block (single port) to an interface selector
+      aci_access_port_block_to_access_port:
+        <<: *aci_login
+        leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
+        access_port_selector: accessportselectorname
+        leaf_port_blk: leafportblkname
+        from_port: 13
+        to_port: 13
+        state: '{{state}}'
+      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
