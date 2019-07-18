@@ -33,10 +33,10 @@
     - name: Add a new VLAN encap block
       aci_vlan_pool_encap_block:
         <<: *aci_login
-        block_name: "{{global.vlan_pool}}"
-        pool: "{{global.vlan_pool}}"
+        block_name: "{{item.access_policy_vlan_pool_name}}"
+        pool: "{{item.access_policy_vlan_pool_name}}"
         pool_allocation_mode: static
-        block_start: "{{global.vlan_min}}"
-        block_end: "{{global.vlan_max}}"
+        block_start: "{{item.access_policy_vlan_pool_encap_block_from}}"
+        block_end: "{{item.access_policy_vlan_pool_encap_block_to}}"
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","vlan_pool","encap_block") }}'
