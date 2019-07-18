@@ -108,7 +108,7 @@
         <<: *aci_login
         leaf_interface_profile: '{{item.access_policy_interface_policy_profile_name}}'
         access_port_selector: '{{item.access_policy_interface_policy_profile_interface_selector_name}}'
-        leaf_port_blk: '{{item.access_policy_interface_policy_profile_interface_selector_name}}'
+        leaf_port_blk: '{{item.access_policy_interface_policy_profile_interface_selector_policy_group}}'
         from_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_from}}'
         to_port: '{{item.access_policy_interface_policy_profile_interface_selector_int_to}}'
         state: '{{state}}'
