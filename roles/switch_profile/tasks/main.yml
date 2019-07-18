@@ -1,0 +1,97 @@
+- name: Add a new physical domain
+  aci_domain:
+#    host: apic
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    domain: "{{global.phys_dom}}"
+    domain_type: phys
+    state: "{{state}}"
+  delegate_to: localhost
+
+- name: Add a new AEP
+  aci_aep:
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    aep: "{{global.aaep}}"
+    description: Configured by ansible
+    state: "{{state}}"
+  delegate_to: localhost
+
+- name: Add a new VLAN pool
+  aci_vlan_pool:
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    pool: "{{global.vlan_pool}}"
+    pool_allocation_mode: static
+    description: Production VLANs configured by ansible
+    state: "{{state}}"
+  delegate_to: localhost
+
+- name: Add a new VLAN encap block
+  aci_vlan_pool_encap_block:
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    block_name: "{{global.vlan_pool}}"
+    pool: "{{global.vlan_pool}}"
+    pool_allocation_mode: static
+    block_start: "{{global.vlan_min}}"
+    block_end: "{{global.vlan_max}}"
+    state: "{{state}}"
+  delegate_to: localhost
+
+- name: Add AEP to domain binding
+  aci_aep_to_domain: &binding_present
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    aep: "{{global.aaep}}"
+    domain: "{{global.phys_dom}}"
+    domain_type: phys
+    state: "{{state}}"
+  delegate_to: localhost
+
+- name: Bind a physical domain to VLAN pool
+  aci_domain_to_vlan_pool:
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    domain: "{{global.phys_dom}}"
+    domain_type: phys
+    pool: "{{global.vlan_pool}}"
+    pool_allocation_mode: static
+    state: "{{state}}"
+  delegate_to: localhost
+
+- name: creating a Leaf Profile with description
+  with_items: "{{leafs}}"
+  aci_switch_policy_leaf_profile:
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    leaf_profile: "{{item.name}}"
+    description: Configured by ansible
+    state: "{{state}}"
+  delegate_to: localhost
+
+
+- name: adding a switch policy leaf profile selector associated Node Block range (w/ policy group)
+  with_items: "{{leafs}}"
+  aci_switch_leaf_selector:
+    validate_certs: False
+    host: "{{ inventory_hostname }}"
+    password: "{{ password }}"
+    leaf_profile: "{{item.name}}"
+    leaf: "{{item.name}}"
+    leaf_node_blk: "{{item.name}}"
+    from: "{{item.id}}"
+    to: "{{item.id}}"
+    state: "{{state}}"
+  delegate_to: localhost
+
+
+
+

@@ -1,0 +1,19 @@
+---
+- name: Debug
+  loop: "{{ leafs }}"
+  debug:
+   # loop: "{{item.interfaces}}"
+    msg: "Hops {{item}}"
+
+
+- debug:
+    msg: "{{ item }}"
+  vars:
+    nested_list:
+      - - First
+        - one
+        - two
+        - three
+      - - 2nd
+        - 3rd
+  with_items: "{{hostvars.leaf101.interfaces}}"

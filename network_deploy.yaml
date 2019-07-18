@@ -1,0 +1,19 @@
+---
+- name: Configuring fabric policies
+  hosts: apic
+  connection: local
+  gather_facts: false
+#  remote_user: "{{ username }}"
+#  password: "{{ password }}"
+#  validate_certs: False  
+  roles:
+#    - switch_profile
+    - debug
+
+
+- name: Configure Tenants
+  hosts: apic
+  connection: local
+  gather_facts: false
+  roles:
+    - tenant
