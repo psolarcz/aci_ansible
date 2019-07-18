@@ -102,7 +102,7 @@ aci_model_data:
   - physical_domain:
     - name: POD1_phyDomain
       vlan_pool: POD1_100-149_Static
-      vlan_pool_alloc: static
+      vlan_pool_alloc: phys
   tenant:
   - name: Pod1_Customer99
     description: Customer99_Configured by Ansible

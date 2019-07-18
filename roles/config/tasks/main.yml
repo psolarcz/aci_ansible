@@ -45,7 +45,7 @@
       aci_domain:
         <<: *aci_login
         domain: "{{item.access_policy_physical_domain_name}}"
-        domain_type: '{{item.access_policy_physical_domain_vlan_pool_alloc}}'
+        domain_type: phys
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","physical_domain") }}'
 
