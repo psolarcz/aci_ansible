@@ -93,5 +93,5 @@
         from: "{{item.access_policy_switch_policy_profile_leaf_selector_from}}"
         to: "{{item.access_policy_switch_policy_profile_leaf_selector_to}}"
         state: "{{state}}"
-      with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile") }}'
+      with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","leaf_selector") }}'
 
