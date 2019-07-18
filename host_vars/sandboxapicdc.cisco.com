@@ -12,31 +12,36 @@ aci_model_data:
       switch1: 997
       switch2: 998
   - switch_policy_profile:
-    - name: leaf_997
+    - name: POD1_Leaf101
       leaf_selector:
-      - name: 997
-        from: 997
-        to: 997
+      - name: 101
+        from: 101
+        to: 101
       interface_selector_profile:
-      - name: leaf_997
-    - name: leaf_998
+      - name: POD1_Leaf101
+    - name: POD1_Leaf102
       leaf_selector:
-      - name: 998
-        from: 998
-        to: 998
+      - name: 102
+        from: 102
+        to: 102
       interface_selector_profile:
-      - name: leaf_998
-    - name: leaf_997_998
+      - name: POD1_Leaf102
+    - name: POD1_Leaf101_102
       leaf_selector:
-      - name: 997_998
-        from: 997
-        to: 998
+      - name: 101_102
+        from: 101
+        to: 102
       interface_selector_profile:
-      - name: leaf_997_998
+      - name: POD1_Leaf101_102
   - interface_policy_lldp:
-    - name: LLDPon
+    - name: POD1_LLDPon
       receive_state: enabled
       transmit_state: enabled
+  - interface_policy_cdp:
+    - name: POD1_CDPon
+      state:
+
+
   - interface_policy_port_channel:
     - name: LACPactive
       mode: active
@@ -46,69 +51,73 @@ aci_model_data:
       port_channel: LACPactive
       aep: 99_router_01
   - interface_policy_policy_group_access:
-    - name: 99_baremetal_01
-      lldp: LLDPon
-      aep: 99_baremetal_01
+    - name: POD1_CDP_ON_LLDP_ON
+      lldp: POD1_LLDPon
+      cdp: POD1_CDPon
+      aep: POD1_AAEP
   - interface_policy_profile:
-    - name: leaf_997_998
+#    - name: leaf_997_998
+#      interface_selector:
+#      - name: Router01
+#        int_card: 1
+#        int_to: 22
+#        int_from: 22
+#        policy_group: 99_router_01
+#        policy_group_type: accbundle
+    - name: POD1_Leaf101
       interface_selector:
-      - name: Router01
+      - name: ESX01_vmnic2
         int_card: 1
-        int_to: 22
-        int_from: 22
-        policy_group: 99_router_01
-        policy_group_type: accbundle
-    - name: leaf_997
-      interface_selector:
-      - name: Server01
-        int_card: 1
-        int_to: 33
-        int_from: 33
-        policy_group: 99_baremetal_01
+        int_to: 16
+        int_from: 16
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
-      - name: Server02
+      - name: DCN-CAT4948-1__1_21
         int_card: 1
-        int_to: 34
-        int_from: 34
-        policy_group: 99_baremetal_01
+        int_to: 21
+        int_from: 21
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
-    - name: leaf_998
+    - name: POD1_Leaf102
       interface_selector:
-      - name: Server02
+      - name: ESX02_vmnic3
         int_card: 1
-        int_to: 35
-        int_from: 35
-        policy_group: 99_baremetal_01
+        int_to: 48
+        int_from: 48
+        policy_group: POD1_CDP_ON_LLDP_ON
+        policy_group_type: accportgrp
+      - name: DCN-CAT4948-1__1_5
+        int_card: 1
+        int_to: 5
+        int_from: 5
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
   - vlan_pool:
-    - name: 99_router_01
+    - name: POD1_100-149_Static
       alloc: static
       encap_block:
-      - from: 201
-        to: 201
-    - name: 99_baremetal_01
-      alloc: static
+      - from: 100
+        to: 149
+    - name: POD1_150-199_Dynamic
+      alloc: dynamic
       encap_block:
-      - from: 101
-        to: 102
+      - from: 150
+        to: 199
   - aep:
-    - name: 99_router_01
+    - name: POD1_AAEP
       domain:
-      - name: l3dom-99_router_01
-    - name: 99_baremetal_01
-      domain:
-      - name: phys-99_baremetal_01
+      - name: POD1_phyDomain
   - external_routed_domain:
     - name: 99_router_01
       vlan_pool: 99_router_01
       vlan_pool_alloc: static
   - physical_domain:
-    - name: 99_baremetal_01
-      vlan_pool: 99_baremetal_01
-      vlan_pool_alloc: static
+    - name: POD1_phyDomain
+      vlan_pool: POD1_100-149_Static
+      vlan_pool_alloc: phys
   tenant:
-  - name: 99_Customer01
-    description: Customer01
+  - name: Pod1_Customer99
+    description: Customer99_Configured by Ansible
     app:
     - name: Billing
       epg:

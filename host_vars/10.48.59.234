@@ -34,9 +34,14 @@ aci_model_data:
       interface_selector_profile:
       - name: POD1_Leaf101_102
   - interface_policy_lldp:
-    - name: LLDPon
+    - name: POD1_LLDPon
       receive_state: enabled
       transmit_state: enabled
+  - interface_policy_cdp:
+    - name: POD1_CDPon
+      state:
+
+
   - interface_policy_port_channel:
     - name: LACPactive
       mode: active
@@ -46,9 +51,10 @@ aci_model_data:
       port_channel: LACPactive
       aep: 99_router_01
   - interface_policy_policy_group_access:
-    - name: 99_baremetal_01
-      lldp: LLDPon
-      aep: 99_baremetal_01
+    - name: POD1_CDP_ON_LLDP_ON
+      lldp: POD1_LLDPon
+      cdp: POD1_CDPon
+      aep: POD1_AAEP
   - interface_policy_profile:
 #    - name: leaf_997_998
 #      interface_selector:
@@ -64,13 +70,13 @@ aci_model_data:
         int_card: 1
         int_to: 16
         int_from: 16
-        policy_group: CDP_on_LLDP_off
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
       - name: DCN-CAT4948-1__1_21
         int_card: 1
         int_to: 21
         int_from: 21
-        policy_group: CDP_on_LLDP_off
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
     - name: POD1_Leaf102
       interface_selector:
@@ -78,13 +84,13 @@ aci_model_data:
         int_card: 1
         int_to: 48
         int_from: 48
-        policy_group: CDP_on_LLDP_off
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
       - name: DCN-CAT4948-1__1_5
         int_card: 1
         int_to: 5
         int_from: 5
-        policy_group: CDP_on_LLDP_off
+        policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
   - vlan_pool:
     - name: POD1_100-149_Static

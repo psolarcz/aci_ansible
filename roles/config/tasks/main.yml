@@ -113,6 +113,18 @@
           {"infraAccPortP":{"attributes":{"descr":"","dn":"uni/infra/accportprof-{{ item.access_policy_interface_policy_profile_name }}","name":"{{ item.access_policy_interface_policy_profile_name }}","ownerKey":"","ownerTag":""},"children":[{"infraHPortS":{"attributes":{"descr":"","name":"{{ item.access_policy_interface_policy_profile_interface_selector_name }}","ownerKey":"","ownerTag":"","type":"range"},"children":[{"infraRsAccBaseGrp":{"attributes":{"fexId":"101","tDn":"uni/infra/funcprof/{{ item.access_policy_interface_policy_profile_interface_selector_policy_group_type }}-{{ item.access_policy_interface_policy_profile_interface_selector_policy_group }}"}}},{"infraPortBlk":{"attributes":{"descr":"","fromCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","fromPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_from }}","name":"block2","toCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","toPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_to }}"}}}]}}]}}
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
 
+    - name: Create a Leaf Access Port Policy Group (no description)
+      aci_interface_policy_leaf_policy_group:
+        <<: *aci_login
+        lag_type: leaf
+        policy_group: "{{item.access_policy_interface_policy_policy_group_access_name}}"
+        link_level_policy: "{{item.access_policy_interface_policy_policy_group_access_lldp}}"
+        cdp_policy: "{{item.access_policy_interface_policy_policy_group_access_cdp}}"
+        aep: "{{item.access_policy_interface_policy_policy_group_access_aep}}"
+        state: present
+      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_policy_group_access") }}'
+
+
 #    - name: Associate an access port block (single port) to an interface selector
 #      aci_access_port_block_to_access_port:
 #        <<: *aci_login
