@@ -113,6 +113,16 @@
 #        state: '{{state}}'
 #      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
 
+#    - name: Add interface selector profiles to switch policy profiles
+#      aci_rest:
+#        <<: *aci_login
+#        path: /api/node/mo/uni/infra/nprof-{{ item.access_policy_switch_policy_profile_name }}.json
+#        method: post
+#        content:
+#          {"infraNodeP":{"attributes":{"descr":"","dn":"uni/infra/nprof-{{ item.access_policy_switch_policy_profile_name }}","name":"{{ item.access_policy_switch_policy_profile_name }}","ownerKey":"","ownerTag":""},"children":[{"infraRsAccPortP":{"attributes":{"tDn":"uni/infra/accportprof-{{ item.access_policy_switch_policy_profile_interface_selector_profile_name }}"}}}]}}
+#      with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","interface_selector_profile") }}'
+
+
     - name: Add interface selector profiles to switch policy profiles
       aci_rest:
         <<: *aci_login
