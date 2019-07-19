@@ -105,6 +105,7 @@ aci_model_data:
     - name: POD1_AAEP
       domain:
       - name: POD1_phyDomain
+        name: POD1_vSwitch
   - external_routed_domain:
     - name: 99_router_01
       vlan_pool: 99_router_01
