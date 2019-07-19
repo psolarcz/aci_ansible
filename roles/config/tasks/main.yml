@@ -162,3 +162,12 @@
 #        to_port: 5
 #        state: '{{state}}'
 #      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
+
+
+    - name: Associating an interface selector profile to a switch policy leaf profile
+      aci_interface_selector_to_switch_policy_leaf_profile:
+        <<: *aci_login
+        leaf_profile: "{{item.access_policy_switch_policy_profile_name}}"
+        interface_selector: "{{item.access_policy_switch_policy_profile_interface_selector_profile_name}}"
+        state: "{{state}}"
+      with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","interface_selector_profile") }}'
