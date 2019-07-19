@@ -106,10 +106,8 @@ aci_model_data:
       domain:
       - name: POD1_phyDomain
         type: phys
-        vm_provider: vmware
       - name: POD1_vSwitch
         type: vmm
-        vm_provider: vmware
   - external_routed_domain:
     - name: 99_router_01
       vlan_pool: 99_router_01
