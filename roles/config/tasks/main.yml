@@ -96,14 +96,12 @@
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","switch_policy_profile","leaf_selector") }}'
 
-    - name: Add interface selector to interface policy profiles
-      aci_rest:
+    - name: Create CDP Policy
+      aci_interface_policy_cdp:
         <<: *aci_login
-        path: /api/node/mo/uni/infra/accportprof-{{ item.access_policy_interface_policy_profile_name }}.json
-        method: "{{ 'post' if (state == 'present') else 'delete' }}"
-        content:
-          {"infraAccPortP":{"attributes":{"descr":"","dn":"uni/infra/accportprof-{{ item.access_policy_interface_policy_profile_name }}","name":"{{ item.access_policy_interface_policy_profile_name }}","ownerKey":"","ownerTag":""},"children":[{"infraHPortS":{"attributes":{"descr":"","name":"{{ item.access_policy_interface_policy_profile_interface_selector_name }}","ownerKey":"","ownerTag":"","type":"range"},"children":[{"infraRsAccBaseGrp":{"attributes":{"fexId":"101","tDn":"uni/infra/funcprof/{{ item.access_policy_interface_policy_profile_interface_selector_policy_group_type }}-{{ item.access_policy_interface_policy_profile_interface_selector_policy_group }}"}}},{"infraPortBlk":{"attributes":{"descr":"","fromCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","fromPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_from }}","name":"block2","toCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","toPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_to }}"}}}]}}]}}
-      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
+        cdp_policy: "{{item.access_policy_interface_policy_cdp_name}}"
+        state: "{{state}}"
+      with_items: "{{ aci_model_data|aci_listify('access_policy','interface_policy_cdp') }}"
 
     - name: Create LLDP interface policies
       aci_intf_policy_lldp:
@@ -113,25 +111,6 @@
         transmit_state: '{{ item.access_policy_interface_policy_lldp_transmit_state }}'
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_lldp") }}'
-
-#    - name: Create a CDP policy
-#      aci_rest:
-#        <<: *aci_login
-#        path: api/node/mo/uni/infra/cdpIfP-{{ item.access_policy_interface_policy_cdp_name }}.json  # Path to the CDP object
-#        method: "{{ 'post' if (state == 'present') else 'delete' }}"
-#        content:
-#          cdpIfPol: #CDP policy object itself
-#            attributes:
-#              name: "{{ item.access_policy_interface_policy_cdp_name }}"
-#              status: "{{ item.access_policy_interface_policy_cdp_adminSt }}"  #Admin State setting, can be enabled or disabled
-#      with_items: "{{ aci_model_data|aci_listify('access_policy','interface_policy_cdp') }}"
-
-    - name: Create CDP Policy
-      aci_interface_policy_cdp:
-        <<: *aci_login
-        cdp_policy: "{{item.access_policy_interface_policy_cdp_name}}"
-        state: "{{state}}"
-      with_items: "{{ aci_model_data|aci_listify('access_policy','interface_policy_cdp') }}"
 
     - name: Create a Leaf Access Port Policy Group (no description)
       aci_interface_policy_leaf_policy_group:
@@ -152,17 +131,14 @@
         state: '{{state}}'
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile") }}'
 
-#    - name: Associate an access port block (single port) to an interface selector
-#      aci_access_port_block_to_access_port:
-#        <<: *aci_login
-#        leaf_interface_profile: POD1_Leaf101
-#        access_port_selector: POD1_Leaf101
-#        leaf_port_blk: POD1_Leaf101
-#        from_port: 5
-#        to_port: 5
-#        state: '{{state}}'
-#      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
-
+    - name: Add interface selector to interface policy profiles
+      aci_rest:
+        <<: *aci_login
+        path: /api/node/mo/uni/infra/accportprof-{{ item.access_policy_interface_policy_profile_name }}.json
+        method: "{{ 'post' if (state == 'present') else 'delete' }}"
+        content:
+          {"infraAccPortP":{"attributes":{"descr":"","dn":"uni/infra/accportprof-{{ item.access_policy_interface_policy_profile_name }}","name":"{{ item.access_policy_interface_policy_profile_name }}","ownerKey":"","ownerTag":""},"children":[{"infraHPortS":{"attributes":{"descr":"","name":"{{ item.access_policy_interface_policy_profile_interface_selector_name }}","ownerKey":"","ownerTag":"","type":"range"},"children":[{"infraRsAccBaseGrp":{"attributes":{"fexId":"101","tDn":"uni/infra/funcprof/{{ item.access_policy_interface_policy_profile_interface_selector_policy_group_type }}-{{ item.access_policy_interface_policy_profile_interface_selector_policy_group }}"}}},{"infraPortBlk":{"attributes":{"descr":"","fromCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","fromPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_from }}","name":"block2","toCard":"{{ item.access_policy_interface_policy_profile_interface_selector_int_card }}","toPort":"{{ item.access_policy_interface_policy_profile_interface_selector_int_to }}"}}}]}}]}}
+      with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
 
     - name: Associating an interface selector profile to a switch policy leaf profile
       aci_interface_selector_to_switch_policy_leaf_profile:
