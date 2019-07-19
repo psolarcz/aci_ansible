@@ -19,6 +19,7 @@
         <<: *aci_login
         tenant: '{{ item.tenant_name }}'
         description: '{{ item.tenant_description }}'
+        state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("tenant") }}'
 
     - name: Add VLAN pools
@@ -110,6 +111,7 @@
         lldp_policy: '{{ item.access_policy_interface_policy_lldp_name }}'
         receive_state: '{{ item.access_policy_interface_policy_lldp_receive_state }}'
         transmit_state: '{{ item.access_policy_interface_policy_lldp_transmit_state }}'
+        state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_lldp") }}'
 
     - name: Create a CDP policy
@@ -132,7 +134,7 @@
         link_level_policy: "{{item.access_policy_interface_policy_policy_group_access_lldp}}"
         cdp_policy: "{{item.access_policy_interface_policy_policy_group_access_cdp}}"
         aep: "{{item.access_policy_interface_policy_policy_group_access_aep}}"
-        state: present
+        state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_policy_group_access") }}'
 
     - name: Add a new leaf_interface_profile
