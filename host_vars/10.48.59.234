@@ -106,7 +106,7 @@ aci_model_data:
       domain:
       - name: POD1_phyDomain
         type: phys
-        vm_provider: none
+        vm_provider: vmware
       - name: POD1_vSwitch
         type: vmm
         vm_provider: vmware
