@@ -64,7 +64,7 @@
         aep: "{{item.access_policy_aep_name}}"
         domain: "{{item.access_policy_aep_domain_name}}"
         domain_type: "{{item.access_policy_aep_domain_type}}"
-        vm_provider: "{{ 'vmware' if (item.access_policy_aep_domain_type == 'vmware') else '' }}"
+        vm_provider: "{{ 'vmware' if (item.access_policy_aep_domain_type == 'vmware') else omit }}"
         state: "{{state}}"
       with_items: '{{ aci_model_data|aci_listify("access_policy","aep", "domain") }}'
 
