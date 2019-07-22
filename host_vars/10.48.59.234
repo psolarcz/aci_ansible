@@ -155,15 +155,15 @@ aci_model_data:
         - name: 99_baremetal_01
           type: phys
     bd:
-    - name: app_bd
+    - name: servers
       subnet: 
-      - name: 10.10.10.1
+      - name: 192.168.200.1
         mask: 24
         scope: private
       vrf: Customer01
-    - name: web_bd
+    - name: hosts
       subnet: 
-      - name: 20.20.20.1
+      - name: 192.168.201.1
         mask: 24
         scope: private
       vrf: Customer01
