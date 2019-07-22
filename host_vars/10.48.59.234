@@ -160,13 +160,13 @@ aci_model_data:
       - name: 192.168.200.1
         mask: 24
         scope: private
-      vrf: Customer01
+      vrf: VRF1
     - name: hosts_bd
       subnet: 
       - name: 192.168.201.1
         mask: 24
         scope: private
-      vrf: Customer01
+      vrf: VRF1
       l3out: 
       - name: l3out
     vrf:
