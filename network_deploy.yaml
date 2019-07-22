@@ -11,12 +11,12 @@
     - debug
 
 
-- name: Configure Fabic
-  hosts: apic
-  connection: local
-  gather_facts: false
-  roles:
-    - config
+#- name: Configure Fabic
+#  hosts: apic
+#  connection: local
+#  gather_facts: false
+#  roles:
+#    - config
 
 - name: Configure Tenant
   hosts: apic
