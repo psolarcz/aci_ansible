@@ -6,7 +6,19 @@
 #    msg: "{{item}}"
 
 
-- name: Debug
-  with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
-  debug:
-    msg: "{{item}}"
+#- name: Debug
+#  with_items: '{{ aci_model_data|aci_listify("access_policy","interface_policy_profile","interface_selector") }}'
+#  debug:
+#    msg: "{{item}}"
+
+
+- name: Gather all registered virtual machines
+  vmware_vm_facts:
+    hostname: 10.48.59.207
+    username: pod1
+    password: ins3965!
+  delegate_to: localhost
+  register: vmfacts
+
+- debug:
+    var: vmfacts.virtual_machines
