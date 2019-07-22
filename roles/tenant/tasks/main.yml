@@ -76,7 +76,7 @@
         tenant: "{{item.tenant_name}}"
         ap: "{{item.tenant_app_name}}"
         epg: "{{item.tenant_app_epg_name}}"
-        domain: "{{item.tenant_app_epg_domain}}"
+        domain: "{{item.tenant_app_epg_domain_name}}"
         domain_type: "{{item.tenant_app_epg_domain_type}}"
         vm_provider: "{{ 'vmware' if (item.tenant_app_epg_domain_type == 'vmm') else omit }}"
       with_items: '{{ aci_model_data|aci_listify("tenant","app","epg","domain") }}'
