@@ -28,7 +28,7 @@
         tenant: "{{item.tenant_name}}"
         ap: "{{item.tenant_app_name}}"
         description: Created by Ansible
-      with_items: '{{ aci_model_data|aci_listify("tenant_app") }}'
+      with_items: '{{ aci_model_data|aci_listify("tenant","app") }}'
 
     - name: Add a new VRF to a tenant
       aci_vrf:
@@ -38,4 +38,4 @@
         descr: Created by Ansible
         policy_control_preference: enforced
         policy_control_direction: ingress
-      with_items: '{{ aci_model_data|aci_listify("tenant_vrf") }}'
+      with_items: '{{ aci_model_data|aci_listify("tenant","vrf") }}'
