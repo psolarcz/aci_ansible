@@ -122,8 +122,8 @@ aci_model_data:
     app:
     - name: Billing
       epg:
-      - name: web
-        bd: web_bd
+      - name: servers
+        bd: servers_bd
         contract:
         - name: internet
           type: consumer
@@ -139,10 +139,10 @@ aci_model_data:
           encap: vlan-101
           mode: native
         domain:
-        - name: 99_baremetal_01
-          type: phys
-      - name: app
-        bd: app_bd
+        - name: POD1_vSwitch
+          type: vmm
+      - name: hosts
+        bd: hosts_bd
         contract:
         - name: web_app
           type: provider
@@ -152,16 +152,16 @@ aci_model_data:
           encap: vlan-102
           mode: untagged
         domain:
-        - name: 99_baremetal_01
-          type: phys
+        - name: POD1_vSwitch
+          type: vmm
     bd:
-    - name: servers
+    - name: servers_bd
       subnet: 
       - name: 192.168.200.1
         mask: 24
         scope: private
       vrf: Customer01
-    - name: hosts
+    - name: hosts_bd
       subnet: 
       - name: 192.168.201.1
         mask: 24
