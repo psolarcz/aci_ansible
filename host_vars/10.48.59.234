@@ -117,8 +117,8 @@ aci_model_data:
       vlan_pool: POD1_100-149_Static
       vlan_pool_alloc: phys
   tenant:
-  - name: Pod1_Customer99
-    description: Customer99_Configured by Ansible
+  - name: POD1_TNT
+    description: POD1_TNT_Configured by Ansible
     app:
     - name: Billing
       epg:
@@ -170,7 +170,7 @@ aci_model_data:
       l3out: 
       - name: l3out
     vrf:
-    - name: Customer01
+    - name: VRF1
     contract:
     - name: internet
       scope: tenant

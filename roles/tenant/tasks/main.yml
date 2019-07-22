@@ -1,10 +1,41 @@
 ---
-- name: Creating tenant
-  aci_tenant:
-    host: "{{ inventory_hostname }}"
-    username: "{{ username }}"
-    password: "{{ password }}"
-    state: "present"
-    validate_certs: False
-    tenant: Ps_test
-    description: "Tenant Created Using Ansible"
+- name: Push aci_model
+
+  # We prepare an aci_login anchor for convenience
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ inventory_hostname }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      use_proxy: '{{ apic_use_proxy }}'
+      validate_certs: '{{ apic_validate_certs }}'
+      state: "{{state}}"
+
+  # We define the delegate_to at the block-level
+  delegate_to: localhost
+
+  block:
+    - name: Create tenants
+      aci_tenant:
+        <<: *aci_login
+        tenant: '{{ item.tenant_name }}'
+        description: '{{ item.tenant_description }}'
+      with_items: '{{ aci_model_data|aci_listify("tenant") }}'
+
+    - name: Create a new AP
+      aci_ap:
+        <<: *aci_login
+        tenant: "{{item.tenant_name}}"
+        ap: "{{item.tenant_app_name}}"
+        description: Created by Ansible
+      with_items: '{{ aci_model_data|aci_listify("tenant_app") }}'
+
+    - name: Add a new VRF to a tenant
+      aci_vrf:
+        <<: *aci_login
+        vrf: "{{item.tenant_vrf_name}}"
+        tenant: "{{item.tenant_name}}"
+        descr: Created by Ansible
+        policy_control_preference: enforced
+        policy_control_direction: ingress
+      with_items: '{{ aci_model_data|aci_listify("tenant_vrf") }}'

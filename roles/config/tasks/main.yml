@@ -14,13 +14,6 @@
   delegate_to: localhost
 
   block:
-    - name: Create tenants
-      aci_tenant:
-        <<: *aci_login
-        tenant: '{{ item.tenant_name }}'
-        description: '{{ item.tenant_description }}'
-        state: "{{state}}"
-      with_items: '{{ aci_model_data|aci_listify("tenant") }}'
 
     - name: Add VLAN pools
       aci_vlan_pool:

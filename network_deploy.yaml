@@ -18,4 +18,10 @@
   roles:
     - config
 
+- name: Configure Tenant
+  hosts: apic
+  connection: local
+  gather_facts: false
+  roles:
+    - tenant
 
