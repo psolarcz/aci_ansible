@@ -80,8 +80,8 @@ aci_model_data:
       interface_selector:
       - name: ESX02_vmnic3
         int_card: 1
-        int_to: 48
-        int_from: 48
+        int_to: 16
+        int_from: 16
         policy_group: POD1_CDP_ON_LLDP_ON
         policy_group_type: accportgrp
       - name: DCN-CAT4948-1__1_5
