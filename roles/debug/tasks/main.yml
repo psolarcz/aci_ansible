@@ -18,7 +18,7 @@
     username: pod1
     password: ins3965!
     validate_certs: no
-    port:  9443
+#    port:  9443
   delegate_to: localhost
   register: vmfacts
 
