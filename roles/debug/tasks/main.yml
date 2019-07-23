@@ -32,7 +32,7 @@
 - debug:
     msg: "{{ item }}"
   with_items:
-    - "{{ vm_facts.virtual_machines  }}"
+    - "{{ vm_facts  }}"
   vars:
     query: "[?guest_name=='POD1_host1']"
 
