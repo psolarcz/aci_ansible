@@ -26,7 +26,7 @@
 - name: Load data
   slurp:
     src: ~/vms
-  register: vmfacts
+  register: vm_facts
 
 
 - debug:
