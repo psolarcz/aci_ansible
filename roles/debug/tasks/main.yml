@@ -24,7 +24,7 @@
 
 
 - debug:
-    msg: "{{ item }}"
+    msg: "{{ item.uuid }}"
   with_items:
     - "{{ vm_facts.virtual_machines | json_query(query) }}"
   vars:
