@@ -157,7 +157,7 @@ aci_model_data:
     bd:
     - name: servers_bd
       subnet: 
-      - name: 192.168.200.1
+      - name: 10.0.0.1
         mask: 24
         scope: private
       vrf: VRF1
