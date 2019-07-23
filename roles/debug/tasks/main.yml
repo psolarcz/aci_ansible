@@ -12,22 +12,22 @@
 #    msg: "{{item}}"
 
 
-- name: Gather all registered virtual machines
-  vmware_dvs_portgroup_facts:
-    hostname: 10.48.59.207
-    username: pod1
-    password: ins3965!
-    validate_certs: no
-    datacenter: ACI-POD2
-#    port:  9443
-  delegate_to: localhost
-  register: dvpg_facts
-
-- name: Get number of ports for portgroup 'dvpg_001' in 'dvs_001'
-  debug:
-#    msg: "{{ item.num_ports }}"
-    msg: "{{dvpg_facts}}"
-  with_items:
-    - "{{ dvpg_facts.dvs_portgroup_facts['dvs_001'] | json_query(query) }}"
-  vars:
-    query: "[?portgroup_name=='dvpg_001']"
+#- name: Gather all registered virtual machines
+#  vmware_dvs_portgroup_facts:
+#    hostname: 10.48.59.207
+#    username: pod1
+#    password: ins3965!
+#    validate_certs: no
+#    datacenter: ACI-POD2
+##    port:  9443
+#  delegate_to: localhost
+#  register: dvpg_facts
+#
+#- name: Get number of ports for portgroup 'dvpg_001' in 'dvs_001'
+#  debug:
+##    msg: "{{ item.num_ports }}"
+#    msg: "{{dvpg_facts}}"
+#  with_items:
+#    - "{{ dvpg_facts.dvs_portgroup_facts['dvs_001'] | json_query(query) }}"
+#  vars:
+#    query: "[?portgroup_name=='dvpg_001']"
