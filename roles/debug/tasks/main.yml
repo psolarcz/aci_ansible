@@ -22,10 +22,12 @@
   delegate_to: localhost
   register: vmfacts
 
+#
+#- debug:
+#    msg: "{{ item.uuid }}"
+#  with_items:
+#    - "{{ vm_facts.virtual_machines | json_query(query) }}"
+#  vars:
+#    query: "[?guest_name=='POD1_host1']"
 
-- debug:
-    msg: "{{ item.uuid }}"
-  with_items:
-    - "{{ vm_facts.virtual_machines | json_query(query) }}"
-  vars:
-    query: "[?guest_name=='POD1_host1']"
+- local_action: copy content={{ vmfacts }} dest=~/vms
