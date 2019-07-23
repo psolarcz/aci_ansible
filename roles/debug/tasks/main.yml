@@ -22,5 +22,10 @@
   delegate_to: localhost
   register: vmfacts
 
+
 - debug:
-    var: vmfacts.virtual_machines
+    msg: "{{ item }}"
+  with_items:
+    - "{{ vm_facts.virtual_machines | json_query(query) }}"
+  vars:
+    query: "[?guest_name=='POD1_host1']"
