@@ -105,7 +105,9 @@ aci_model_data:
     - name: POD1_AAEP
       domain:
       - name: POD1_phyDomain
-        name: POD1_vSwitch
+        type: phys
+      - name: POD1_vSwitch
+        type: vmm
   - external_routed_domain:
     - name: 99_router_01
       vlan_pool: 99_router_01
@@ -115,13 +117,13 @@ aci_model_data:
       vlan_pool: POD1_100-149_Static
       vlan_pool_alloc: phys
   tenant:
-  - name: Pod1_Customer99
-    description: Customer99_Configured by Ansible
+  - name: POD1_TNT
+    description: POD1_TNT_Configured by Ansible
     app:
     - name: Billing
       epg:
-      - name: web
-        bd: web_bd
+      - name: servers
+        bd: servers_bd
         contract:
         - name: internet
           type: consumer
@@ -137,10 +139,10 @@ aci_model_data:
           encap: vlan-101
           mode: native
         domain:
-        - name: 99_baremetal_01
-          type: phys
-      - name: app
-        bd: app_bd
+        - name: POD1_vSwitch
+          type: vmm
+      - name: hosts
+        bd: hosts_bd
         contract:
         - name: web_app
           type: provider
@@ -150,25 +152,25 @@ aci_model_data:
           encap: vlan-102
           mode: untagged
         domain:
-        - name: 99_baremetal_01
-          type: phys
+        - name: POD1_vSwitch
+          type: vmm
     bd:
-    - name: app_bd
-      subnet: 
-      - name: 10.10.10.1
+    - name: servers_bd
+      subnet:
+      - name: 10.0.0.1
         mask: 24
         scope: private
-      vrf: Customer01
-    - name: web_bd
-      subnet: 
-      - name: 20.20.20.1
+      vrf: VRF1
+    - name: hosts_bd
+      subnet:
+      - name: 192.168.201.1
         mask: 24
-        scope: public
-      vrf: Customer01
-      l3out: 
+        scope: private
+      vrf: VRF1
+      l3out:
       - name: l3out
     vrf:
-    - name: Customer01
+    - name: VRF1
     contract:
     - name: internet
       scope: tenant
